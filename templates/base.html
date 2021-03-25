@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <title>
+        購屋決策支援系統
+    </title>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        <div id="content">
+            <div id=header >
+                    <div id ="p_header">
+                        <h1><a href="../">購屋決策支援系統</a></h1>     
+                    </div>
+                    
+            </div> 
+        </div>
+        {% block body %}{% endblock %}
+        <p></p>    
+        
+        <footer>
+            <br>
+            <h6>Photo by freestocks.org on Unsplash</h6>
+        </footer>
+    </body>
+</html>

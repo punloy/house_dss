@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="content" >
+
+    <div id="result" style = overflow-x:auto; >
+        <!--OUTPUT {% for table in tables %}{% endfor %} -->
+        <h2>Result</h2>
+        <br>
+        <h3>{{ r_title }}</h3>
+
+        {%for i in range(0, 5)%}
+            {{i+1}}：{{r_list[i]}}<br>
+        {%endfor%}  
+
+        <br><br>
+        
+        <button onclick="window.location.href = '../search';">返回搜尋</button>
+    </div>
+
+</div>
+{% endblock %}

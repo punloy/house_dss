@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link href="https://kendo.cdn.telerik.com/2019.3.1023/styles/kendo.common.min.css" rel="stylesheet" />
+<link href="https://kendo.cdn.telerik.com/2019.3.1023/styles/kendo.default.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2019.3.1023/js/kendo.all.min.js"></script>
+<script type="text/javascript">
+    $.ajax({ 
+        url: Flask.url_for('my_function'), 
+        type: 'POST', 
+        data: JSON.stringify(movies), // converts js value to JSON string 
+        }) 
+        .done(function(result){  // on success get the return object from server 
+            console.log(result)  // do whatever with it. In this case see it in console 
+    }) 
+</script>     
+{% endblock %}
+
+{% block body %}
+<div class="content" >
+    <div id ="search">
+        <h2>How</h2><br>
+        <p>
+            本系統致力於讓使用者在買房前，考量下列購屋因素，系統會為您計算最佳推薦鄰里結果。<br>
+            請按照個人考量因素的重要程度，排定下列購屋因素的重要性順序<br>
+        </p>
+    </div>
+    <div id="sort"></div>
+    
+        <form action="{{ url_for('result') }}" method="POST">
+            
+            <div style="height: 320px;"	>
+            
+                <div style="width: 300px; float:right; margin-right:300px">考慮因素
+                    <select id="listbox2" style="width: 300px; height: 300px; right: 0"></select>
+                    <script>
+                        $("#listbox2").kendoListBox({
+                            connectWith: "listbox",
+                            dropSources: ["listbox"],
+                            draggable: {
+                                hint: function(element) {
+                                    return $("<span></span>")
+                                        .text(element.text())
+                                        .css("color", "#FF0000");
+                                },
+                                placeholder: function(element) {
+                                    return element.clone().css({
+                                        "opacity": 0.3,
+                                        "border": "1px dashed #000000"
+                                    });
+                                }
+                            },
+                            dataSource: [
+                                { name: "四大超商", id: "convenienceStore" },
+                                { name: "診所", id: "clinic" },
+                                { name: "郵局", id: "postOffice" },
+                                { name: "托育中心", id: "babySitting" },
+                                { name: "學校", id: "school" },
+                                { name: "公園", id: "park" },
+                                { name: "平均年齡", id: "age" },
+                                { name: "人口密度", id: "m2" },
+                                { name: "殯儀館", id: "dead" },
+                                { name: "垃圾場", id: "trash" },
+                                { name: "屠宰場", id: "slaughterhouse" },
+                                { name: "變電所", id: "electricity" },
+                                { name: "警察局", id: "police" },
+                                { name: "竊盜率", id: "stolen" },
+                                { name: "工作機會", id: "job" },
+                                { name: "平均每戶年收入", id: "annualIncome" },
+                                { name: "交通事故量", id: "accident" },
+                                { name: "尖峰時段時速", id: "speed" },
+                                { name: "鄰近捷運站", id: "MRT" },
+                                { name: "鄰近火車站", id: "train" },
+                                { name: "鄰近高鐵站", id: "rail" },
+                                { name: "平均房價(坪)", id: "price" },
+                                { name: "4年平均交易量", id: "transac" },
+                                { name: "房價漲跌狀況", id: "hSituation" }
+                            ],
+                            dataTextField: "name",
+                            dataValueField: "id"
+                        });
+                    </script>
+                </div>
+                <div style="width: 300px; float:left; margin-left:300px">排定順序
+                    <select name="selectbox" id="listbox" style="width: 300px; height: 300px;"></select>
+                    <script>
+                        $("#listbox").kendoListBox({
+                            connectWith: "listbox2",
+                            dropSources: ["listbox2"],
+                            draggable: {
+                                hint: function(element) {
+                                    return $("<span></span>")
+                                        .text(element.text())
+                                        .css("color", "#FF0000");
+                                },
+                                placeholder: function(element) {
+                                    return element.clone().css({
+                                        "opacity": 0.3,
+                                        "border": "1px dashed #000000"
+                                    });
+                                }
+                            },
+                            dataTextField: "name",
+                            dataValueField: "id"
+                        });
+                    </script>
+                </div>
+            </div>
+            <p></p>
+            <div id=sequence style="width: 800px; text-align: center; justify-content: center;">
+                <input type="submit" name="nameinfo" value="推薦鄰里結果"/>
+            </div>
+        </form>
+    </div>    
+	
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}    
+{% endblock %}
+
+
+{% block body %}
+<div id ="search">
+    <h2>About</h2><br>
+    <p>
+        歡迎使用本系統，<br>
+        本系統致力於讓使用者在買房前，依照下列購屋因素，<br>
+        按照個人考量排定優先程度，系統會為您計算最佳推薦鄰里結果。<br>
+    </p><br>
+    <form action="{{ url_for('search') }}" method="POST">
+        <input class ="button" type="submit" name = "start" value=" START " ></button>
+    </form>
+    
+</div>
+{% endblock %}   
